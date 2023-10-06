@@ -66,10 +66,10 @@ To avoid having to specify the --zone flag when required, set the "compute zone"
 $ gcloud compute zones list
 NAME               REGION           STATUS  NEXT_MAINTENANCE  TURNDOWN_DATE
 ...
-us-east1-b         us-east1         UP
+us-west1-a         us-west1         UP
 ...
 
-$ gcloud config set compute/zone us-east1-b
+$ gcloud config set compute/zone us-west1-a
 ```
 
 Now you are ready to create the Kubernetes cluster. A cluster is a group of nodes
@@ -77,7 +77,7 @@ that run Kubernetes.
 To provision a cluster with 3 nodes, run the following command:
 
 ```
-$ gcloud container clusters create k8s-cluster
+$ gcloud container clusters create gke-dp-dev
 
 kubeconfig entry generated for k8s-cluster.
 NAME          ZONE        MASTER_VERSION  MASTER_IP       MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
@@ -92,8 +92,8 @@ With your cluster up and running, you are now ready to run containers.
 ## Get the Source Code
 Now that you have Kubernetes running it's time to get the source code for this tutorial. If you are running in GKE you can `git clone` in the Google Cloud Shell. Otherwise clone the repository wherever you run `kubectl` (the command line interface to interact with kubernetes clusters).
 ```
-$ git clone https://github.com/ibm-datapower/datapower-tutorials.git
-$ cd datapower-tutorials/using-datapower-in-kubernetes/
+$ git clone https://github.com/trucdp/datapower-poc.git
+$ cd datapower-poc/using-datapower-in-kubernetes/
 ```
 
 
@@ -121,7 +121,7 @@ metadata:
 spec:
     containers:
         - name: datapower
-          image: ibmcom/datapower:latest
+          image: icr.io/cpopen/datapower/datapower-limited:2018.4.1.26
           stdin: true
           tty: true
           env:
@@ -401,7 +401,7 @@ spec:
     spec:
       containers:
       - name: datapower
-        image: "ibmcom/datapower:latest"
+        image: "icr.io/cpopen/datapower/datapower-limited:2018.4.1.26"
         stdin: true
         tty: true
         ports:
