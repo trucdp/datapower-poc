@@ -134,7 +134,7 @@ spec:
 To create the pod, we simply run:
 
 ```
-$ kubectl create -f kubernetes/pods/datapower-pod.yaml
+$ kubectl apply -f kubernetes/pods/datapower-pod.yaml
 pod "datapower" created
 ```
 
@@ -202,7 +202,7 @@ Note the `replicas: 3` declaration, here we are declaring that we want three ins
 
 To create the ReplicaSet above we run:
 ```
-$ kubectl create -f kubernetes/replicasets/datapower-replicaset.yaml
+$ kubectl apply -f kubernetes/replicasets/datapower-replicaset.yaml
 replicaset "datapower" created
 ```
 
@@ -258,7 +258,7 @@ In order to use the service you first need to deploy the application that provid
 To deploy the sample backend Pod, you can run:
 
 ```
-$ kubectl create -f kubernetes/pods/backend-pod.yaml
+$ kubectl apply -f kubernetes/pods/backend-pod.yaml
 ```
 
 The `backend` Pod consists of a single container that responds with "Hello world from [hostname]"
@@ -284,7 +284,7 @@ spec:
 To create the Service object, we run the familiar command:
 
 ```
-$ kubectl create -f kubernets/services/backend-service.yaml
+$ kubectl apply -f kubernets/services/backend-service.yaml
 service "backend" created
 ```
 
@@ -304,7 +304,7 @@ to the Service like so:
 
 
 ```
-$ kubectl create -f kubernetes/pods/busybox-test-pod.yaml
+$ kubectl apply -f kubernetes/pods/busybox-test-pod.yaml
 pod "busybox" created
 
 $ kubectl exec --tty --stdin busybox -- wget -O -  backend:8080
@@ -366,9 +366,9 @@ These will set up our DataPower domain with application logic and services; it w
 
 To create the ConfigMaps, simply `cd` to the `datapower` directory and type:
 
-`$ kubectl create configmap datapower-config --from-file=config/ --from-file=config/foo`
+`$ kubectl apply configmap datapower-config --from-file=config/ --from-file=config/foo`
 
-`$ kubectl create configmap datapower-local-foo --from-file=local/foo`
+`$ kubectl apply configmap datapower-local-foo --from-file=local/foo`
 
 And to get more details about the ConfigMaps we just created, we can type:
 
@@ -441,9 +441,9 @@ There is likewise a *deployment* config file for our *backend* application which
 
 To create the deployments we head over to the `kubernetes/deployments` directory and issue the following commands:
 
-`$ kubectl create -f datapower-deployment.yaml`
+`$ kubectl apply -f datapower-deployment.yaml`
 
-`$ kubectl create -f backend-deployment.yaml`
+`$ kubectl apply -f backend-deployment.yaml`
 
 ### Exposing Our Application to the Internet
 
@@ -455,11 +455,11 @@ Now, we want to expose the application service so that we can access it from the
 We can expose the datapower multi-protocol gateway service running on port 80 that was configured using our  `datapower-config` ConfigMap by
 heading over to the `kubernetes/services` directory and running:
 
-`$ kubectl create -f datapower-service.yaml`
+`$ kubectl apply -f datapower-service.yaml`
 
 Likewise, create the backend service by running:
 ```
-$ kubectl create -f backend-service.yaml
+$ kubectl apply -f backend-service.yaml
 
 ```
 
