@@ -120,15 +120,16 @@ metadata:
         app: datapower
 spec:
     containers:
-        - name: datapower
-          image: icr.io/cpopen/datapower/datapower-limited:2018.4.1.26
-          stdin: true
-          tty: true
-          env:
+      - name: "datapower"
+        image: icr.io/cpopen/datapower/datapower-limited:10.5.0.1
+        stdin: true
+        tty: true
+        env:
           - name: DATAPOWER_ACCEPT_LICENSE
             value: "true"
           - name: DATAPOWER_INTERACTIVE
             value: "true"
+            
 ```
 
 To create the pod, we simply run:

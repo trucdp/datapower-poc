@@ -4,6 +4,9 @@ metadata:
   name: datapower
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: datapower
   template:
     metadata:
       labels:
@@ -12,7 +15,7 @@ spec:
     spec:
       containers:
       - name: datapower
-        image: "ibmcom/datapower:latest"
+        image: "icr.io/cpopen/datapower/datapower-limited:10.5.0.1"
         stdin: true
         tty: true      
         ports:
